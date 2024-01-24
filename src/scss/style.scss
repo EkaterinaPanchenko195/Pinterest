@@ -6,7 +6,7 @@
 }
 
 .main {
-    padding-top: 20px;
+  padding-top: 20px;
   width: 100%;
   padding-left: 10%;
   padding-right: 10%;
@@ -27,13 +27,13 @@
     font-family: cursive;
 
     &_button {
-        border: none;
-        padding: 15px;
-        font-size: 17px;
-        cursor: pointer;
-        &:hover {
-            background-color: #9c0017;
-        }
+      border: none;
+      padding: 15px;
+      font-size: 17px;
+      cursor: pointer;
+      &:hover {
+        background-color: #9c0017;
+      }
     }
   }
 
@@ -46,6 +46,4 @@
     font-size: 18px;
     padding: 15px;
   }
-
-
 }
