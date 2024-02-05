@@ -13,7 +13,9 @@
 
 @media screen and (width <= 960px) {
   .nav {
-    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
   }
 }
 
