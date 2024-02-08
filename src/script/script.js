@@ -9,11 +9,12 @@ import {
 } from "./arr.js";
 
 // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ ОБЪЕКТА В КЛЮЧЕ LOCALSTORAGE
-function createItemInTable(arr, avatar, imgItem, hashtagItem, setTable) {
+function createItemInTable(arr, avatar, imgItem, hashtagItem, setTable, id) {
   const objTable = {
     avatar,
     imgItem,
     hashtagItem,
+    id,
   };
   const newArr = [...arr, objTable];
 
@@ -95,6 +96,13 @@ function createItem(array, type) {
       className: ["item__button"],
       text: "...",
       place: item,
+    });
+    const itemClose = createElement({
+      tag: "button",
+      className: ["item__button", "item__button_none"],
+      text: "X",
+      place: item,
+      attribute: { id: "close" },
     });
     // окно "меню" itemMenu
     const menu = createElement({
@@ -217,20 +225,65 @@ function createItem(array, type) {
       menu.classList.toggle("menu_hidden");
       modalWindowComplain.classList.toggle("modal_hidden");
     });
+
+    //  по нажатию на кнопку "x", ( на доске 1 || 2 || 3) удаляется выбр. элемент списка
+    itemClose.addEventListener("click", () => {
+      containerItem.remove();
+      const getfirst = getTableFirst();
+      const getsecond = getTableSecond();
+      const getthird = getTableThird();
+      const tableOne = document.querySelector("#first");
+      const tableTwo = document.querySelector("#second");
+
+      const deleteItem = (getArr, setArr) => {
+        const newArr = getArr.filter((obj) => obj.avatar !== avatar);
+        localStorage.removeItem(getArr);
+        setArr(newArr);
+      };
+
+      if (tableOne) {
+        deleteItem(getfirst, setTableFirst);
+      } else if (tableTwo) {
+        deleteItem(getsecond, setTableSecond);
+      } else {
+        deleteItem(getthird, setTableThird);
+      }
+    });
     //ПО НАЖАТИЮ НА КНОПКУ "Доска 1"
     buttonTableFirst.addEventListener("click", () => {
       const arr = getTableFirst();
-      createItemInTable(arr, avatar, imgItem, hashtagItem, setTableFirst);
+      createItemInTable(
+        arr,
+        avatar,
+        imgItem,
+        hashtagItem,
+        setTableFirst,
+        obj.id
+      );
     });
     //ПО НАЖАТИЮ НА КНОПКУ "Доска 2"
     buttonTableSecond.addEventListener("click", () => {
       const arr = getTableSecond();
-      createItemInTable(arr, avatar, imgItem, hashtagItem, setTableSecond);
+      createItemInTable(
+        arr,
+        avatar,
+        imgItem,
+        hashtagItem,
+        setTableSecond,
+        obj.id
+      );
     });
     //ПО НАЖАТИЮ НА КНОПКУ "Доска 3"
     buttonTableThird.addEventListener("click", () => {
       const arr = getTableThird();
-      createItemInTable(arr, avatar, imgItem, hashtagItem, setTableThird);
+      createItemInTable(
+        arr,
+        avatar,
+        imgItem,
+        hashtagItem,
+        setTableThird,
+        obj.id
+      );
     });
     //ПО НАЖАТИЮ НА КНОПКУ "НАЗАД"
     buttonBack.addEventListener("click", () => {
@@ -269,13 +322,12 @@ function selectTable() {
     text: "Доска 3",
     place: navButtonBlock,
   });
-
+  // пояляется кнопка x
   navButton.addEventListener("click", () => {
     navButtonBlock.classList.toggle("nav-block_hidden");
   });
 
   //------------------------by click-----------------------------
-
   tableFirst.addEventListener("click", () => {
     list.innerHTML = "";
 
@@ -284,11 +336,15 @@ function selectTable() {
       className: ["list__title"],
       text: "FIRST BOARD",
       place: list,
+      attribute: { id: "first" },
     });
     const newArr = getTableFirst();
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // пояляется кнопка x
+    const close = document.querySelectorAll(".item__button_none");
+    close.forEach((elem) => elem.classList.toggle("item__button_close"));
   });
   tableSecond.addEventListener("click", () => {
     list.innerHTML = "";
@@ -298,11 +354,15 @@ function selectTable() {
       className: ["list__title"],
       text: "SECOND BOARD",
       place: list,
+      attribute: { id: "second" },
     });
     const newArr = getTableSecond();
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // пояляется кнопка x
+    const close = document.querySelectorAll(".item__button_none");
+    close.forEach((elem) => elem.classList.toggle("item__button_close"));
   });
   tableThird.addEventListener("click", () => {
     list.innerHTML = "";
@@ -317,17 +377,31 @@ function selectTable() {
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // пояляется кнопка x
+    const close = document.querySelectorAll(".item__button_none");
+    close.forEach((elem) => elem.classList.toggle("item__button_close"));
   });
 }
 selectTable();
 
 // СОРТИРОВКА ФОТОГРАФИЙ ПО ХЕШТЕГУ
-const search = document.querySelector("#search");
+// const search = document.querySelector("#search");
+
+// search.addEventListener("input", async ({ target: { value } }) => {
+//   const arr = await getData();
+//   const hashtagMatches = arr.filter((obj) => obj.hashtag.indexOf(value) !== -1);
+
+//   list.innerHTML = "";
+//   createItem(hashtagMatches);
+// });
 
 search.addEventListener("input", async ({ target: { value } }) => {
-  const arr = await getData();
-  const hashtagMatches = arr.filter((obj) => obj.hashtag.indexOf(value) !== -1);
-
-  list.innerHTML = "";
-  createItem(hashtagMatches);
+  const arr = document.querySelectorAll(".description-block__hashtag");
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].textContent.indexOf(value) !== -1) {
+      arr[i].parentNode.parentNode.style.display = "block";
+    } else {
+      arr[i].parentNode.parentNode.style.display = "none";
+    }
+  }
 });

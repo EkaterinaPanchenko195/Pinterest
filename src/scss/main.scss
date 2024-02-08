@@ -46,6 +46,19 @@
       position: absolute;
       right: 20px;
       width: 30px;
+      &_none {
+        display: none;
+      }
+      &_close {
+        display: block;
+        right: 20px;
+        top: 10px;
+        color: #9c0017;
+        border: none;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+      }
     }
   }
   &__img {
@@ -150,6 +163,9 @@
     }
     &:hover {
       background-color: #9c0017;
+    }
+    &:active {
+      background-color: #014423;
     }
     &_change {
       display: none;
