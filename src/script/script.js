@@ -338,10 +338,25 @@ function selectTable() {
       place: list,
       attribute: { id: "first" },
     });
+    // кнопка -удалить все
+    const button = createElement({
+      tag: "button",
+      className: ["button-title"],
+      text: "Delete All",
+      place: title,
+    });
     const newArr = getTableFirst();
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // по нажатию на кнопку "Delete All"
+    button.addEventListener("click", () => {
+      // list.innerHTML = "";
+      let items = document.querySelectorAll(".container-item");
+      items.forEach((elem) => (elem.innerHTML = ""));
+      localStorage.removeItem(getTableFirst());
+      setTableFirst([]);
+    });
     // пояляется кнопка x
     const close = document.querySelectorAll(".item__button_none");
     close.forEach((elem) => elem.classList.toggle("item__button_close"));
@@ -356,10 +371,24 @@ function selectTable() {
       place: list,
       attribute: { id: "second" },
     });
+    // кнопка -удалить все
+    const button = createElement({
+      tag: "button",
+      className: ["button-title"],
+      text: "Delete All",
+      place: title,
+    });
     const newArr = getTableSecond();
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // по нажатию на кнопку "Delete All"
+    button.addEventListener("click", () => {
+      let items = document.querySelectorAll(".container-item");
+      items.forEach((elem) => (elem.innerHTML = ""));
+      localStorage.removeItem(getTableSecond());
+      setTableSecond([]);
+    });
     // пояляется кнопка x
     const close = document.querySelectorAll(".item__button_none");
     close.forEach((elem) => elem.classList.toggle("item__button_close"));
@@ -373,10 +402,24 @@ function selectTable() {
       text: "THIRD BOARD",
       place: list,
     });
+    // кнопка -удалить все
+    const button = createElement({
+      tag: "button",
+      className: ["button-title"],
+      text: "Delete All",
+      place: title,
+    });
     const newArr = getTableThird();
 
     navButtonBlock.classList.toggle("nav-block_hidden");
     createItem(newArr, "newData");
+    // по нажатию на кнопку "Delete All"
+    button.addEventListener("click", () => {
+      let items = document.querySelectorAll(".container-item");
+      items.forEach((elem) => (elem.innerHTML = ""));
+      localStorage.removeItem(getTableThird());
+      setTableThird([]);
+    });
     // пояляется кнопка x
     const close = document.querySelectorAll(".item__button_none");
     close.forEach((elem) => elem.classList.toggle("item__button_close"));

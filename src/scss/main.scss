@@ -17,6 +17,7 @@
     color: #9c0017;
     width: 100%;
     text-align: center;
+    padding-bottom: 20px;
   }
 }
 
@@ -213,4 +214,16 @@
 
 .modal_hidden {
   display: none;
+}
+
+.button-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 25px;
+  background-color: #fff;
+  cursor: pointer;
+  width: 20%;
+  height: 35px;
 }

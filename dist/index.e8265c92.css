@@ -98,6 +98,7 @@
   color: #9c0017;
   text-align: center;
   width: 100%;
+  padding-bottom: 20px;
   font-family: cursive;
   font-size: 35px;
 }
@@ -301,6 +302,18 @@
 
 .modal_hidden {
   display: none;
+}
+
+.button-title {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 35px;
+  margin: 0 auto;
+  display: flex;
 }
 
 * {
