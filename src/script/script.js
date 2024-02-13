@@ -6,7 +6,7 @@ import {
   setTableFirst,
   setTableSecond,
   setTableThird,
-} from "./arr.js";
+} from "./localstorage.js";
 
 // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ ОБЪЕКТА В КЛЮЧЕ LOCALSTORAGE
 function createItemInTable(arr, avatar, imgItem, hashtagItem, setTable, id) {
